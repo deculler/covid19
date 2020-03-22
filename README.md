@@ -10,6 +10,6 @@ Launch the notebook on mybinder:
 
 It will clone the JHU repo to download the most recent data.  
 
-[View the noteboo on nbviewer](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/index.ipynb)
+[View the notebook on nbviewer](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/index.ipynb)
 
 

@@ -7,4 +7,5 @@ RUN pip install datascience
 
 ARG NB_USER="jovyan"
 COPY index.ipynb /home/$NB_USER/work/
+COPY timetable.py /home/$NB_USER/work/
 

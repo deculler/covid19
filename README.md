@@ -1,8 +1,10 @@
 # covid19
 
-Contains Notebooks analyzing Covid-19 infection data from Johns Hopkins.  They pull data from
+Contains Notebooks analyzing Covid-19 infection data from Johns Hopkins.  So many thanks to the incredible work of Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE):
+https://systems.jhu.edu/.  They provide lots of geospatial visualization.  The notebooks here provide an analytical view. 
+They pull data from
 [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19), which is updated
-daily.
+daily.  Various notebooks look at slices through this invaluable data.
 
 Website for this repo: [https://deculler.github.io/covid19/](https://deculler.github.io/covid19/)
 
@@ -13,7 +15,7 @@ Repo for this website: [https://github.com/deculler/covid19](https://github.com/
 * Covid19-Worldwide.ipynb [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Covid19-Worldwide.ipynb)
 examine the growth in confirmed cases at a Country level, showing individual countries contribute to the overall picture
 and examining growth rates per country.  Worldwide and per-country projections provide a sense of what the exponential growth
-is leading to.
+is leading to.  To run the notebooks live:
   * [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Covid19-Worldwide.ipynb)
   * [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Covid19-Worldwide.ipynb)
 

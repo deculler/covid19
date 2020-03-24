@@ -14,10 +14,8 @@ Repo for this website: [https://github.com/deculler/covid19](https://github.com/
 examine the growth in confirmed cases at a Country level, showing individual countries contribute to the overall picture
 and examining growth rates per country.  Worldwide and per-country projections provide a sense of what the exponential growth
 is leading to.
-
- ** [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Covid19-Worldwide.ipynb)
-
- ** [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Covid19-Worldwide.ipynb)
+  * [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Covid19-Worldwide.ipynb)
+  * [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Covid19-Worldwide.ipynb)
 
 Cloud infrastuctures for running notebooks
 

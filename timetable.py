@@ -3,62 +3,73 @@ import numpy as np
 from scipy.interpolate import UnivariateSpline, interp1d
 
 class TimeTable(Table):
-    """Table with a designated column as a sequence of times in the first column."""
+    """Table with a designated column as a sequence of times in the first column.
+    optionally, time_less provide comparison of times.
+    """
 
-    def __init__(self, *args, time_column = 'Year'):
+    def __init__(self, *args, time_column = 'Day', time_less = None):
         Table.__init__(self, *args)
         self.time_column = time_column
+        self.time_less = time_less
         
     @property
     def categories(self):
         return [label for label in self.labels if label != self.time_column]
     
     @classmethod
-    def from_table(cls, tbl, time_col):
-        ttbl = cls(time_column = time_col)
+    def from_table(cls, tbl, time_col, time_less_fun = None):
+        """ Construct a TimeTable from a Table """
+
+        ttbl = cls(time_column = time_col, time_less = time_less_fun)
         for label in tbl.labels:
             ttbl[label] = tbl[label]
         return ttbl
     
     @classmethod
-    def by_time(cls, tbl, time_col, category_col, collect_col, collect=sum):
-        """Construct a time table by aggregating rows of each category by year."""
+    def by_time(cls, tbl, time_col, category_col, collect_col, collect=sum,
+                     time_less_fun = None):
+        """Construct a time table by aggregating rows of each category by time bins."""
+
         tbl_by_time = tbl.select([category_col, time_col, collect_col]).pivot(category_col, time_col, 
                                                                               collect_col, collect=collect)
-        return cls(tbl_by_time.labels, time_column=time_col).append(tbl_by_time)
+        return cls(tbl_by_time.labels,
+                   time_column=time_col,
+                   time_less=time_less_fun).append(tbl_by_time)
     
     @classmethod
-    def transpose(cls, tbl, category_col, time_col='Day') :
+    def transpose(cls, tbl, category_col, time_col='Day', time_less = None) :
         """Transpose a table with one column containing categories and remaining labels time stamps"""
+
         time_col_vals = [lbl for lbl in tbl.labels if not lbl == category_col]
         xtbl = Table().with_column(time_col, time_col_vals)
         vals = tbl.drop(category_col)
         for lbl, vals in zip(tbl[category_col], vals.rows) :
             xtbl[lbl] = vals
-        return TimeTable.from_table(xtbl, time_col)
+        return TimeTable.from_table(xtbl, time_col, time_less)
     
     # Functional Table methods produce a new object.  Need to set time_column attribute
 
     def _fix_(self, t):
+        """Retain TimeTable attributes across functional Table methods."""
         if self.time_column in t.labels :
-            return self.from_table(t, self.time_column)
+            return self.from_table(t, self.time_column, self.time_less)
         else :
             return Table.copy(t)
 
     def read_table(self, *args, **kwargs):
-        return self.from_table(Table.read_table(*args, **kwargs), self.time_column)
+        return self._fix_(Table.read_table(*args, **kwargs))
     
     def with_column(self, *args, **kwargs):
-        return self.from_table(Table.with_column(*args, **kwargs), self.time_column)
+        return self._fix_(Table.with_column(*args, **kwargs))
     
     def with_columns(self, *args, **kwargs):
-        return self.from_table(Table().with_columns(*args, **kwargs), self.time_column)
+        return self._fix_(Table().with_columns(*args, **kwargs))
     
     def with_row(self, *args, **kwargs):
-        return self.from_table(Table.with_row(*args, **kwargs), self.time_column)
+        return self._fix_(Table.with_row(*args, **kwargs))
     
     def with_rows(self, *args, **kwargs):
-        return self.from_table(Table.with_rows(*args, **kwargs), self.time_column)
+        return self._fix_(Table.with_rows(*args, **kwargs))
     
     def copy(self, *args, **kwargs):
         return self._fix_(Table.copy(self, *args, **kwargs))
@@ -105,6 +116,25 @@ class TimeTable(Table):
             labels = [self.time_column] + labels
         return self.select(labels)
 
+    def following(self, time_val):
+        """Return TimeTable of rows at or following time_val, inclusive."""
+        if self.time_less :
+            return self.where(self.apply(lambda t: not self.time_less(t, time_val), self.time_column))
+        else :
+            return self.where(self.apply(lambda t: t >= time_val , self.time_column))
+
+    def until(self, time_val):
+        """Return TimeTable of rows up to time_val, inclusive."""
+        if self.time_less :
+            return self.where(self.apply(lambda t: not self.time_less(time_val, t), self.time_column))
+        else :
+            return self.where(self.apply(lambda t: t <= time_val , self.time_column))
+
+    def between(self, time_start, time_end):
+        """Return TimeTable of rows between time_val."""
+        return self.following(time_start).until(time_end)
+
+        
     # TimeTable methods utilizing time_column
     
     def snap(self, times, fcol=None):

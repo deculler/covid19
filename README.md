@@ -10,7 +10,7 @@ Repo for this website: [https://github.com/deculler/covid19](https://github.com/
 
 ## View and run the notbooks
 
-* Covid19-Worldwide.ipynb [View Notebook](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Covid19-Worldwide.ipynb)
+* Covid19-Worldwide.ipynb [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Covid19-Worldwide.ipynb)
 examine the growth in confirmed cases at a Country level, showing individual countries contribute to the overall picture
 and examining growth rates per country.  Worldwide and per-country projections provide a sense of what the exponential growth
 is leading to.

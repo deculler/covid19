@@ -322,14 +322,14 @@ class TimeTable(Table):
                 name = self.categories[0]
                 ttbl[name] = self[name]
                 ttbl['new'] = [np.nan] + list(self[name][1:] - self[name][:-1])
-                ttbl['% new'] = ttbl['new'] / ttbl[name]
+                ttbl['% new'] = ttbl['new'] / (ttbl[name] - ttbl['new'])
                 ttbl.set_format('% new', PercentFormatter)
                 ttbl['rate'] = [np.nan] + list(self[name][1:] / self[name][:-1])
             else :
                 for name in self.categories :
                     ttbl[name] = self[name]
-                    newname = 'new '+ name
-                    pername = '% new'+ name
+                    newname = 'new ' + name
+                    pername = '% new' + name
                     ratename = 'rate ' + name
                     ttbl[newname] = [np.nan] + list(self[name][1:] - self[name][:-1])
                     ttbl[pername] = np.divide(ttbl[newname], ttbl[name])

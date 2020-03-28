@@ -94,6 +94,9 @@ class TimeTable(Table):
 
     def sort(self, *args, **kwargs):
         return self._fix_(Table.sort(self, *args, **kwargs))
+    
+    def join(self, *args, **kwargs):
+        return self._fix_(Table.join(self, *args, **kwargs))
 
     def __get_attr__(self, name):
         def wrapper(*args, **kwargs):

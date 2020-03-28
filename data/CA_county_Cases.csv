@@ -1,45 +1,45 @@
-County,3/24/20,03/25/20
-Alameda,135,135
-Amador,1,1
-Butte,4,4
-Calaveras,2,2
-Contra Costa,86,108
-El Dorado,2,2
-Fresno,18,19
-Humboldt,5,10
-Imperial,6,9
-Inyo,0,1
-Kern,15,24
-Los Angeles,662,799
-Madera,6,7
-Marin,53,60
-Mendocino,2,2
-Merced,1,1
-Mono,2,4
-Monterey,24,24
-Napa,2,5
-Nevada,4,7
-Orange,152,187
-Placer,26,30
-Riverside,59,107
-Sacramento,88,113
-San Benito,7,9
-San Bernardino,31,54
-San Diego,242,297
-San Francisco,152,178
-San Joaquin,60,71
-San Luis Obispo,42,46
-San Mateo,161,165
-Santa Barbara,24,26
-Santa Clara,375,459
-Santa Cruz,24,25
-Shasta,3,3
-Siskiyou,3,3
-Solano,24,31
-Sonoma,34,39
-Stanislaus,11,12
-Sutter,1,2
-Tulare,17,18
-Ventura,39,50
-Yolo,10,10
-Yuba,2,3
+County,3/24/20,03/25/20,03/26/20,03/27/20
+Alameda,135,135,178,220
+Amador,1,1,1,2
+Butte,4,4,5,5
+Calaveras,2,2,2,3
+Contra Costa,86,108,131,147
+El Dorado,2,2,2,12
+Fresno,18,19,19,31
+Humboldt,5,10,10,14
+Imperial,6,9,9,21
+Inyo,0,1,1,5
+Kern,15,24,29,40
+Los Angeles,662,799,1216,1465
+Madera,6,7,7,11
+Marin,53,60,60,68
+Mendocino,2,2,2,2
+Merced,1,1,4,7
+Mono,2,4,4,8
+Monterey,24,24,24,27
+Napa,2,5,5,8
+Nevada,4,7,7,8
+Orange,152,187,187,321
+Placer,26,30,30,41
+Riverside,59,107,107,185
+Sacramento,88,113,113,164
+San Benito,7,9,9,14
+San Bernardino,31,54,54,64
+San Diego,242,297,297,417
+San Francisco,152,178,223,279
+San Joaquin,60,71,77,93
+San Luis Obispo,42,46,54,59
+San Mateo,161,165,195,239
+Santa Barbara,24,26,32,47
+Santa Clara,375,459,542,574
+Santa Cruz,24,25,32,34
+Shasta,3,3,3,3
+Siskiyou,3,3,3,3
+Solano,24,31,31,34
+Sonoma,34,39,39,50
+Stanislaus,11,12,13,23
+Sutter,1,2,2,2
+Tulare,17,18,18,24
+Ventura,39,50,50,61
+Yolo,10,10,10,13
+Yuba,2,3,3,3

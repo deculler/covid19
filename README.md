@@ -1,11 +1,15 @@
 # covid19
 
 Contains Notebooks analyzing Covid-19 infection data from Johns Hopkins and NY Gimes.  So many thanks to the incredible work of Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE):
-https://systems.jhu.edu/ and the NY Times.  They provide lots of geospatial visualization.  The notebooks here provide an analytical view. 
+[https://systems.jhu.edu/](https://systems.jhu.edu/)
+and the 
+[NY Times](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html).  They provide wonderful geospatial visualization.  The notebooks here provide a simple analytical view. 
 They pull data from
 [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19) for wordwide data and
-for Worldwide data and https://github.com/nytimes/covid-19-data for US data. Both are updated
-daily, which takes incredible work.  Notebooks look at slices through this invaluable data.
+for Worldwide data and [https://github.com/nytimes/covid-19-data](https://github.com/nytimes/covid-19-data)
+for US data. Both are updated
+daily, which takes incredible work.  With that, people can explore and work on the data from a temporal perspective.  Where
+might we be in two weeks?
 
 Website for this repo: [https://deculler.github.io/covid19/](https://deculler.github.io/covid19/)
 
@@ -23,7 +27,7 @@ To run the notebooks live:
 * [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Covid19-Worldwide.ipynb)
  
 **US-covid19-nytimes.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/US-covid19-nytimes.ipynb)
-examines the growth in confirmed cases and deaths in the US at the state level.  
+examines the growth in confirmed cases and deaths in the US at the state level, with simple projections.
 
 To run live:
 * [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/US-covid19-nytimes.ipynb)

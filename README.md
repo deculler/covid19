@@ -1,10 +1,11 @@
 # covid19
 
-Contains Notebooks analyzing Covid-19 infection data from Johns Hopkins.  So many thanks to the incredible work of Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE):
-https://systems.jhu.edu/.  They provide lots of geospatial visualization.  The notebooks here provide an analytical view. 
+Contains Notebooks analyzing Covid-19 infection data from Johns Hopkins and NY Gimes.  So many thanks to the incredible work of Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE):
+https://systems.jhu.edu/ and the NY Times.  They provide lots of geospatial visualization.  The notebooks here provide an analytical view. 
 They pull data from
-[https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19), which is updated
-daily.  Various notebooks look at slices through this invaluable data.
+[https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19) for wordwide data and
+for Worldwide data and https://github.com/nytimes/covid-19-data for US data. Both are updated
+daily, which takes incredible work.  Notebooks look at slices through this invaluable data.
 
 Website for this repo: [https://deculler.github.io/covid19/](https://deculler.github.io/covid19/)
 

@@ -17,6 +17,21 @@ Repo for this website: [https://github.com/deculler/covid19](https://github.com/
 
 ## View and run the notbooks
 
+**Counties-US-covid19-nytimes.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Counties-US-covid19-nytimes.ipynb)
+County level exploration and projection of confirmed cases and deaths in the US for any state.  Drawn from the lastest NY Times data.  This provides a deeper understanding behind what you can mouse over at 
+[https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html)
+
+To run live:
+* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Counties-US-covid19-nytimes.ipynb)
+* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Counties-US-covid19-nytimes.ipynb)
+
+**US-covid19-nytimes.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/US-covid19-nytimes.ipynb) State level exploration as above.
+
+To run live:
+* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/US-covid19-nytimes.ipynb)
+* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=US-covid19-nytimes.ipynb)
+
+
 **Covid19-Worldwide.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Covid19-Worldwide.ipynb)
 examines the growth in confirmed cases worldwide at a country level, showing individual countries contribute to the overall picture
 and examining growth rates per country.  Worldwide and per-country projections provide a sense of what the exponential growth
@@ -26,19 +41,7 @@ To run the notebooks live:
 * [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Covid19-Worldwide.ipynb)
 * [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Covid19-Worldwide.ipynb)
  
-**US-covid19-nytimes.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/US-covid19-nytimes.ipynb)
-examines the growth in confirmed cases and deaths in the US at the state level, with simple projections.
 
-To run live:
-* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/US-covid19-nytimes.ipynb)
-* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=US-covid19-nytimes.ipynb)
-
-**Counties-US-covid19-nytimes.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Counties-US-covid19-nytimes.ipynb)
-examines the growth in confirmed cases and deaths in the US state-by-state at the county level.  
-
-To run live:
-* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Counties-US-covid19-nytimes.ipynb)
-* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Counties-US-covid19-nytimes.ipynb)
 
 Cloud infrastuctures for running notebooks
 

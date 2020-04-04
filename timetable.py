@@ -65,11 +65,13 @@ class TimeTable(Table):
     def with_columns(self, *args, **kwargs):
         return self._fix_(Table().with_columns(*args, **kwargs))
     
+    """
     def with_row(self, *args, **kwargs):
         return self._fix_(Table.with_row(*args, **kwargs))
     
     def with_rows(self, *args, **kwargs):
         return self._fix_(Table.with_rows(*args, **kwargs))
+    """
     
     def copy(self, *args, **kwargs):
         return self._fix_(Table.copy(self, *args, **kwargs))
@@ -97,6 +99,8 @@ class TimeTable(Table):
     
     def join(self, *args, **kwargs):
         return self._fix_(Table.join(self, *args, **kwargs))
+    
+    
 
     def __get_attr__(self, name):
         def wrapper(*args, **kwargs):
@@ -136,7 +140,6 @@ class TimeTable(Table):
     def between(self, time_start, time_end):
         """Return TimeTable of rows between time_val."""
         return self.following(time_start).until(time_end)
-
         
     # TimeTable methods utilizing time_column
     

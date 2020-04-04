@@ -1,6 +1,6 @@
 # covid19
 
-Contains Notebooks analyzing Covid-19 infection data from Johns Hopkins and NY Gimes.  So many thanks to the incredible work of Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE):
+Contains Notebooks analyzing Covid-19 infection data from Johns Hopkins and NY Times.  So many thanks to the incredible work of Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE):
 [https://systems.jhu.edu/](https://systems.jhu.edu/)
 and the 
 [NY Times](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html).  They provide wonderful geospatial visualization.  The notebooks here provide a simple analytical view. 

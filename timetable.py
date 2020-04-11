@@ -7,37 +7,39 @@ class TimeTable(Table):
     optionally, time_less provide comparison of times.
     """
 
-    def __init__(self, *args, time_column = 'Day', time_less = None):
+    def __init__(self, *args, time_column = 'Day', time_less = None, time_inc = None):
         Table.__init__(self, *args)
         self.time_column = time_column
         self.time_less = time_less
+        self.time_inc = time_inc
         
     @property
     def categories(self):
         return [label for label in self.labels if label != self.time_column]
     
     @classmethod
-    def from_table(cls, tbl, time_col, time_less_fun = None):
+    def from_table(cls, tbl, time_col, time_less_fun = None, time_inc_fun = None):
         """ Construct a TimeTable from a Table """
 
-        ttbl = cls(time_column = time_col, time_less = time_less_fun)
+        ttbl = cls(time_column = time_col, time_less = time_less_fun, time_inc = time_inc_fun)
         for label in tbl.labels:
             ttbl[label] = tbl[label]
         return ttbl
     
     @classmethod
     def by_time(cls, tbl, time_col, category_col, collect_col, collect=sum,
-                     time_less_fun = None):
+                     time_less_fun = None, time_inc_fun = None):
         """Construct a time table by aggregating rows of each category by time bins."""
 
         tbl_by_time = tbl.select([category_col, time_col, collect_col]).pivot(category_col, time_col, 
                                                                               collect_col, collect=collect)
         return cls(tbl_by_time.labels,
-                   time_column=time_col,
-                   time_less=time_less_fun).append(tbl_by_time)
+                   time_column = time_col,
+                   time_less   = time_less_fun,
+                   time_inc    = time_inc_fun).append(tbl_by_time)
     
     @classmethod
-    def transpose(cls, tbl, category_col, time_col='Day', time_less = None) :
+    def transpose(cls, tbl, category_col, time_col='Day', time_less = None, time_inc = None) :
         """Transpose a table with one column containing categories and remaining labels time stamps"""
 
         time_col_vals = [lbl for lbl in tbl.labels if not lbl == category_col]
@@ -45,22 +47,22 @@ class TimeTable(Table):
         vals = tbl.drop(category_col)
         for lbl, vals in zip(tbl[category_col], vals.rows) :
             xtbl[lbl] = vals
-        return TimeTable.from_table(xtbl, time_col, time_less)
+        return TimeTable.from_table(xtbl, time_col, time_less, time_inc)
     
     # Functional Table methods produce a new object.  Need to set time_column attribute
 
     def _fix_(self, t):
         """Retain TimeTable attributes across functional Table methods."""
         if self.time_column in t.labels :
-            return self.from_table(t, self.time_column, self.time_less)
+            return self.from_table(t, self.time_column, self.time_less, self.time_inc)
         else :
             return Table.copy(t)
 
     def read_table(self, *args, **kwargs):
         return self._fix_(Table.read_table(*args, **kwargs))
     
-    def with_column(self, *args, **kwargs):
-        return self._fix_(Table.with_column(*args, **kwargs))
+    def with_column(self, label, values):
+        return self._fix_(Table.with_column(self, label, values))
     
     def with_columns(self, *args, **kwargs):
         return self._fix_(Table().with_columns(*args, **kwargs))
@@ -122,15 +124,15 @@ class TimeTable(Table):
         if not self.time_column in labels:
             labels = [self.time_column] + labels
         return self.select(labels)
-
-    def following(self, time_val):
-        """Return TimeTable of rows at or following time_val, inclusive."""
+    
+    def after(self, time_val):
+        """Return TimeTable of rows after time_val, inclusive."""
         if self.time_less :
             return self.where(self.apply(lambda t: not self.time_less(t, time_val), self.time_column))
         else :
             return self.where(self.apply(lambda t: t >= time_val , self.time_column))
 
-    def until(self, time_val):
+    def before(self, time_val):
         """Return TimeTable of rows up to time_val, inclusive."""
         if self.time_less :
             return self.where(self.apply(lambda t: not self.time_less(time_val, t), self.time_column))
@@ -139,7 +141,15 @@ class TimeTable(Table):
 
     def between(self, time_start, time_end):
         """Return TimeTable of rows between time_val."""
-        return self.following(time_start).until(time_end)
+        return self.after(time_start).before(time_end)
+    
+    def tail(self, prev, time_end=None):
+        """Return TimeTable of prev rows prior to time_end, defaults to last."""
+        if not time_end :
+            time_end = self.last(self.time_column)
+        elif isinstance(time_end, int):
+            time_end = self.time_inc(self.last(self.time_column), -time_end)
+        return self.between(self.time_inc(time_end, -prev), time_end)
         
     # TimeTable methods utilizing time_column
     
@@ -182,9 +192,6 @@ class TimeTable(Table):
         """Create a new TimeTable containing the n largest columns."""
         ttbl = self.order_cols()
         return ttbl.select(range(n+1))
-    
-    def after(self, timeval):
-        return self.where(self[self.time_column] >= timeval)
     
     def sum_rows(self):
         """Sum the rows in a TimeTable besides the time column."""

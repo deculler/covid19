@@ -4,12 +4,12 @@ Contains Notebooks analyzing Covid-19 infection data from Johns Hopkins and NY T
 [https://systems.jhu.edu/](https://systems.jhu.edu/)
 and the 
 [NY Times](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html).  They provide wonderful geospatial visualization.  The notebooks here provide a simple analytical view. 
-They pull data from
+The notebooks pull data from
 [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19) for wordwide data and
 for Worldwide data and [https://github.com/nytimes/covid-19-data](https://github.com/nytimes/covid-19-data)
 for US data. Both are updated
 daily, which takes incredible work.  With that, people can explore and work on the data from a temporal perspective.  Where
-might we be in two weeks?
+might we be in two weeks? (I have stopped maintaining the NY Times notebooks, focusing on the JHU data.)
 
 Website for this repo: [https://deculler.github.io/covid19/](https://deculler.github.io/covid19/)
 
@@ -17,29 +17,28 @@ Repo for this website: [https://github.com/deculler/covid19](https://github.com/
 
 ## View and run the notbooks
 
-**Counties-US-covid19-nytimes.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Counties-US-covid19-nytimes.ipynb)
-County level exploration and projection of confirmed cases and deaths in the US for any state.  Drawn from the lastest NY Times data.  This provides a deeper understanding behind what you can mouse over at 
-[https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html)
+**US-County-covid19-JHU.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/US-County-covid19-JHU.ipynb)
+County level exploration and projection of confirmed cases and deaths in the US for any state.
 
 To run live:
-* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Counties-US-covid19-nytimes.ipynb)
-* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Counties-US-covid19-nytimes.ipynb)
+* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/US-County-covid19-JHU.ipynb)
+* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=US-County-covid19-JHU.ipynb)
 
-**US-covid19-nytimes.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/US-covid19-nytimes.ipynb) State level exploration as above.
+**US-covid19-JHU.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/US-covid19-JHU.ipynb) State level exploration as above.
 
 To run live:
-* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/US-covid19-nytimes.ipynb)
-* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=US-covid19-nytimes.ipynb)
+* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/US-covid19-JHU.ipynb)
+* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=US-covid19-JHU.ipynb)
 
 
-**Covid19-Worldwide.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Covid19-Worldwide.ipynb)
+**World-covid19-JHU.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/World-covid19-JHU.ipynb)
 examines the growth in confirmed cases worldwide at a country level, showing individual countries contribute to the overall picture
 and examining growth rates per country.  Worldwide and per-country projections provide a sense of what the exponential growth
 is leading to.  The data is pulled from https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series.
 
 To run the notebooks live:
-* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Covid19-Worldwide.ipynb)
-* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Covid19-Worldwide.ipynb)
+* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/World-covid19-JHU.ipynb)
+* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=World-covid19-JHU.ipynb)
  
 
 

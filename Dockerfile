@@ -6,7 +6,7 @@ RUN pip install --upgrade pip
 RUN pip install datascience
 
 ARG NB_USER="jovyan"
-COPY Covid19-Worldwide.ipynb /home/$NB_USER/work/
-COPY US-covid19-nytimes.ipynb /home/$NB_USER/work/
-COPY Counties-US-covid19-nytimes.ipynb /home/$NB_USER/work/
+COPY World-covid19-JHU.ipynb /home/$NB_USER/work/
+COPY US-covid19-JHU.ipynb /home/$NB_USER/work/
+COPY US-County-covid19-JHU.ipynb /home/$NB_USER/work/
 COPY timetable.py /home/$NB_USER/work/

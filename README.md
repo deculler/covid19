@@ -17,7 +17,7 @@ Repo for this website: [https://github.com/deculler/covid19](https://github.com/
 
 ## View and run the notbooks
 
-[**Covid19-US-Actions-Matter.ipynb***](https://github.com/deculler/covid19/Covid19-US-Actions-Matter.html) [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Covid19-US-Actions-Matter.ipynb) examines how significantly mitigation measures in the US contained the spread of the virus and how recent undermining of those measures has already changed the projection of whether it ends up contained or grows unchecked.
+[**Covid19-US-Actions-Matter.ipynb** ](https://github.com/deculler/covid19/Covid19-US-Actions-Matter.html) [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Covid19-US-Actions-Matter.ipynb) examines how significantly mitigation measures in the US contained the spread of the virus and how recent undermining of those measures has already changed the projection of whether it ends up contained or grows unchecked.
 
 To run live:
 * [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Covid19-US-Actions-Matter.ipynb)

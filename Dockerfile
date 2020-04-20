@@ -9,4 +9,6 @@ ARG NB_USER="jovyan"
 COPY World-covid19-JHU.ipynb /home/$NB_USER/work/
 COPY US-covid19-JHU.ipynb /home/$NB_USER/work/
 COPY US-County-covid19-JHU.ipynb /home/$NB_USER/work/
+COPY Covid19-US-Actions-Matter /home/$NB_USER/work/
 COPY timetable.py /home/$NB_USER/work/
+COPY covid.py /home/$NB_USER/work/

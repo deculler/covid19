@@ -17,6 +17,13 @@ Repo for this website: [https://github.com/deculler/covid19](https://github.com/
 
 ## View and run the notbooks
 
+[**Covid19-US-Actions-Matter.ipynb***](https://github.com/deculler/covid19/Covid19-US-Actions-Matter.html) [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/Covid19-US-Actions-Matter.ipynb) examines how significantly mitigation measures in the US contained the spread of the virus and how recent undermining of those measures has already changed the projection of whether it ends up contained or grows unchecked.
+
+To run live:
+* [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/deculler/covid19/master?filepath=work/Covid19-US-Actions-Matter.ipynb)
+* [datahub.berkeley.edu](http://datahub.berkeley.edu/user-redirect/interact?account=deculler&repo=covid19&branch=master&path=Covid19-US-Actions-Matter.ipynb)
+
+
 **US-County-covid19-JHU.ipynb** [ [View Notebook] ](https://nbviewer.jupyter.org/github/deculler/covid19/blob/master/US-County-covid19-JHU.ipynb)
 County level exploration and projection of confirmed cases and deaths in the US for any state.
 

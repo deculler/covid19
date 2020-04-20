@@ -1,6 +1,7 @@
 from datascience import Table, Formatter, PercentFormatter
 import numpy as np
 from scipy.interpolate import UnivariateSpline, interp1d
+import matplotlib.pyplot as plots
 
 class TimeTable(Table):
     """Table with a designated column as a sequence of times in the first column.
@@ -117,6 +118,9 @@ class TimeTable(Table):
             return wrapper
         else:
             raise AttributeError
+            
+    def get(self, time_val, col):
+        return self.where(self.time_column, time_val).last(col)
     
     def extract(self, column_or_columns):
         """Select catagories along with time column"""
@@ -182,8 +186,13 @@ class TimeTable(Table):
             tbl.move_to_end(label)
         return tbl
     
-    def oplot(self, **kwargs):
-        return self.order_cols().plot(self.time_column, **kwargs)
+    def oplot(self, rotation=90, xlab=None, **kwargs):
+        ocols = self.order_cols()
+        ocols.plot(self.time_column, **kwargs)
+        _ = plots.xticks(rotation=rotation)
+        if xlab and ocols.num_rows > xlab :
+            ocols.plots[-1].xaxis.set_major_locator(plots.MaxNLocator(xlab))
+        return
     
     def obar(self, **kwargs):
         return self.order_cols().bar(self.time_column, **kwargs)
@@ -327,7 +336,7 @@ class TimeTable(Table):
                 atbl[lbl] = ttbl[lbl]
         return atbl
     
-    def trend(self):
+    def trend(self, active_distance=14):
         """Return TimeTable with trends for each time series."""
         ttbl = self.select(self.time_column)
         with np.errstate(divide='ignore', invalid='ignore'):
@@ -338,16 +347,22 @@ class TimeTable(Table):
                 ttbl['% new'] = ttbl['new'] / (ttbl[name] - ttbl['new'])
                 ttbl.set_format('% new', PercentFormatter)
                 ttbl['rate'] = [np.nan] + list(self[name][1:] / self[name][:-1])
+                ttbl['active'] = [np.nansum(ttbl['new'][max(0,i-active_distance) : i+1]) for i in range(ttbl.num_rows)]
+                ttbl['arate'] = ttbl['new'] / ttbl['active']
             else :
                 for name in self.categories :
                     ttbl[name] = self[name]
                     newname = 'new ' + name
-                    pername = '% new' + name
+                    pername = '%new ' + name
                     ratename = 'rate ' + name
+                    actname = 'active ' + name
+                    aratename = 'arate ' + name
                     ttbl[newname] = [np.nan] + list(self[name][1:] - self[name][:-1])
                     ttbl[pername] = np.divide(ttbl[newname], ttbl[name])
                     ttbl.set_format(pername, PercentFormatter)
                     ttbl[ratename] = [np.nan] + list(np.divide(self[name][1:], self[name][:-1]))
+                    ttbl[actname] = [np.nansum(ttbl[newname][max(0,i-active_distance) : i+1]) for i in range(ttbl.num_rows)]
+                    ttbl[aratename] = ttbl[newname] / ttbl[actname]
         return ttbl
     
     

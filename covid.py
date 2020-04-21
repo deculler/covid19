@@ -28,31 +28,6 @@ def format_day(day):
     date =  datetime.datetime.strptime(day, day_fmt)
     return datetime.datetime.strftime(date, day_fmt)
 
-# Preprocssing and Cleaning
-
-def by_state_cases(raw_region):
-    """Aggregate state level data from the raw source"""
-    res = raw_region.drop(['Province/State', 'Lat','Long']).group('Country/Region', sum)
-    
-    for lbl in res.labels[1:] :
-        res.relabel(lbl, format_day(lbl[:-4]))
-    return res
-
-def by_state_deaths(raw_region):
-    """Aggregate state level data from the raw source"""
-    res = raw_region.drop(['Province/State', 'Lat','Long']).group('Country/Region', sum)
-    
-    for lbl in res.labels[1:] :
-        res.relabel(lbl, format_day(lbl[:-4]))
-    return res
-
-def get_countries(raw_world):
-    """Country level metadata from the raw source"""
-    res = raw_world.select(['Country/Region', 'Lat', 'Long']).group('Country/Region', np.mean)
-    for lbl in res.labels[1:] :
-        res.relabel(lbl, lbl[:-5])
-    return res
-
 # Computing rates of growth
 
 def wgmean(vals):

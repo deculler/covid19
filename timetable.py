@@ -336,7 +336,7 @@ class TimeTable(Table):
                 atbl[lbl] = ttbl[lbl]
         return atbl
     
-    def trend(self, active_distance=14):
+    def trend(self, active=True, active_distance=14):
         """Return TimeTable with trends for each time series."""
         ttbl = self.select(self.time_column)
         with np.errstate(divide='ignore', invalid='ignore'):
@@ -347,8 +347,9 @@ class TimeTable(Table):
                 ttbl['% new'] = ttbl['new'] / (ttbl[name] - ttbl['new'])
                 ttbl.set_format('% new', PercentFormatter)
                 ttbl['rate'] = [np.nan] + list(self[name][1:] / self[name][:-1])
-                ttbl['active'] = [np.nansum(ttbl['new'][max(0,i-active_distance) : i+1]) for i in range(ttbl.num_rows)]
-                ttbl['arate'] = ttbl['new'] / ttbl['active']
+                if active :
+                    ttbl['active'] = [np.nansum(ttbl['new'][max(0,i-active_distance) : i+1]) for i in range(ttbl.num_rows)]
+                    ttbl['arate'] = ttbl['new'] / ttbl['active']
             else :
                 for name in self.categories :
                     ttbl[name] = self[name]
@@ -361,8 +362,9 @@ class TimeTable(Table):
                     ttbl[pername] = np.divide(ttbl[newname], ttbl[name])
                     ttbl.set_format(pername, PercentFormatter)
                     ttbl[ratename] = [np.nan] + list(np.divide(self[name][1:], self[name][:-1]))
-                    ttbl[actname] = [np.nansum(ttbl[newname][max(0,i-active_distance) : i+1]) for i in range(ttbl.num_rows)]
-                    ttbl[aratename] = ttbl[newname] / ttbl[actname]
+                    if active :
+                        ttbl[actname] = [np.nansum(ttbl[newname][max(0,i-active_distance) : i+1]) for i in range(ttbl.num_rows)]
+                        ttbl[aratename] = ttbl[newname] / ttbl[actname]
         return ttbl
     
     

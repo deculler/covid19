@@ -82,7 +82,7 @@ def model_rate_trend(trend, val='arate'):
     eparams, epcov = fit(exp_rate, trend, val)
     doffs = list(range(trend.num_rows))
     t1 = trend.with_column('exp pred', exp_rate(doffs, eparams[0], eparams[1]))
-    lparams, lpcov = fit(lin_rate, trend)
+    lparams, lpcov = fit(lin_rate, trend, val)
     t2 = t1.with_column('lin pred', lin_rate(doffs, lparams[0], lparams[1]))
     return t2, eparams, lparams
 
@@ -92,9 +92,15 @@ def show_model_rate_trend(trend, val='arate', height=5, width=8):
     mtrend.extract(['exp pred', 'lin pred']).oplot(height=height, width=width, xlab=25)
     mtrend.plots[-1].scatter(mtrend['date'], mtrend[val])
 
-def project_progressive_trend(trend, region, num_days, fit_start=None, fit_end=None, distance=14):
+
+    
+def project_progressive_trend(trend, region, num_days, 
+                              fit_start=None, fit_end=None, act_dist=14):
+    """ project progressive arate modeled in [fit_start, fit_end] for num_days
+    where active is given by window of length act_dist, matching trend
+    """
     day = trend.last(trend.time_column)
-    old_day = inc_day(day, -distance)
+    old_day = inc_day(day, -act_dist)
     val = trend.last(region)
     new = trend.last('new')
     active = trend.last('active')

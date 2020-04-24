@@ -65,8 +65,8 @@ class TimeTable(Table):
     def with_column(self, label, values):
         return self._fix_(Table.with_column(self, label, values))
     
-    def with_columns(self, *args, **kwargs):
-        return self._fix_(Table().with_columns(*args, **kwargs))
+    def with_columns(self, *labels_and_values, **formatter):
+        return self._fix_(Table().with_columns(*labels_and_values, **formatter))
     
     """
     def with_row(self, *args, **kwargs):

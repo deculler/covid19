@@ -80,19 +80,30 @@ def fit(model, trend, val='arate'):
 
 def model_rate_trend(trend, val='arate'):
     eparams, epcov = fit(exp_rate, trend, val)
+    proj = trend.extract(val)
     doffs = list(range(trend.num_rows))
-    t1 = trend.with_column('exp pred', exp_rate(doffs, eparams[0], eparams[1]))
+    proj['exp proj'] = exp_rate(doffs, eparams[0], eparams[1])
+    proj['exp+'] = exp_rate(doffs, eparams[0]+epcov[0], eparams[1]+epcov[1])
+    proj['exp-'] = exp_rate(doffs, eparams[0]-epcov[0], eparams[1]-epcov[1])
     lparams, lpcov = fit(lin_rate, trend, val)
-    t2 = t1.with_column('lin pred', lin_rate(doffs, lparams[0], lparams[1]))
-    return t2, eparams, lparams
+    proj['lin proj'] = lin_rate(doffs, lparams[0], lparams[1])
+    proj['lin+']    = lin_rate(doffs, lparams[0]+lpcov[0], lparams[1]+lpcov[1])
+    proj['lin-']    = lin_rate(doffs, lparams[0]-lpcov[0], lparams[1]-lpcov[1])
+    return proj, eparams, lparams, epcov, lpcov
 
-def show_model_rate_trend(trend, val='arate', height=5, width=8):
-    mtrend, eparams, lparams = model_rate_trend(trend, val)
-    print(eparams, lparams)
-    mtrend.extract(['exp pred', 'lin pred']).oplot(height=height, width=width, xlab=25)
-    mtrend.plots[-1].scatter(mtrend['date'], mtrend[val])
-
-
+def show_model_rate_trend(trend, val='arate', height=5, width=8, 
+                          alpha=0.2, lincolor='lightcoral', expcolor='aqua'):
+    mtrend, eparams, lparams, epcov, lpcov = model_rate_trend(trend, val)
+    #print(eparams, epcov, lparams, lpcov)
+    mt = mtrend.extract(['exp proj', 'lin proj'])
+    mt.oplot(height=height, width=width, xlab=25)
+    mt.plots[-1].fill_between(mtrend['date'], mtrend['lin-'], mtrend['lin+'], facecolor=lincolor, alpha=alpha)    
+    mt.plots[-1].plot(mtrend['date'], mtrend['lin+'], ':', color=lincolor)
+    mt.plots[-1].plot(mtrend['date'], mtrend['lin-'], ':', color=lincolor)
+    mt.plots[-1].fill_between(mtrend['date'], mtrend['exp-'], mtrend['exp+'], facecolor=expcolor, alpha=alpha)
+    mt.plots[-1].plot(mtrend['date'], mtrend['exp+'], ':', color=expcolor)
+    mt.plots[-1].plot(mtrend['date'], mtrend['exp-'], ':', color=expcolor)
+    mt.plots[-1].scatter(mtrend['date'], mtrend[val])
     
 def project_progressive_trend(trend, region, num_days, 
                               fit_start=None, fit_end=None, act_dist=14):
@@ -112,16 +123,32 @@ def project_progressive_trend(trend, region, num_days,
     else :
         params, pcov = fit(exp_rate, trend, 'arate')
     growths = exp_rate(range(num_days+1), arate, params[1])
+    growths_hi = exp_rate(range(num_days+1), arate, params[1]+pcov[1])
+    growths_lo = exp_rate(range(num_days+1), arate, params[1]-pcov[1])
     
     proj = trend.select([trend.time_column, region, 'new', 'active', 'arate'])
+    proj[region+'-'] = proj[region]
+    proj[region+'+'] = proj[region]
+    proj['new-'] = proj['new']
+    proj['new+'] = proj['new']
+    proj['active-'] = proj['new']
+    proj['active+'] = proj['new']
+    active_lo = active_hi = active
+    val_lo = val_hi = val
     for i in range(num_days):
         day = inc_day(day)
         old_day = inc_day(old_day)
         arate = growths[i+1]
         new = arate*active
+        new_lo = growths_lo[i+1]*active_lo
+        new_hi = growths_hi[i+1]*active_hi
         val = val + new
+        val_lo = val_lo + new_lo
+        val_hi = val_hi + new_hi
         active = active + new - proj.get(old_day, 'new')
-        proj.append((day, val, new, active, arate))
+        active_lo = active_lo + new_lo - proj.get(old_day, 'new-')
+        active_hi = active_hi + new_hi - proj.get(old_day, 'new+')
+        proj.append((day, val, new, active, arate, val_lo, val_hi, new_lo, new_hi, active_lo, active_hi))
     return proj
 
 def proj_prog(trend, region, dist=14, fit_start=None, fit_end=None):
@@ -136,3 +163,7 @@ def proj_prog(trend, region, dist=14, fit_start=None, fit_end=None):
         plots.plot([fit_end, fit_end], [0, trend.get(fit_end, region)], ':')
     plots.text(end, trend.last(region), "{:,}".format(trend.last(region)))
     plots.text(pproj.last('date'), pproj.last(region), "{:,}".format(int(pproj.last(region))))
+    pproj.plots[-1].fill_between(proj['date'], proj[region+'-'], proj[region+'+'], alpha=0.2)
+    pproj.plots[-1].fill_between(proj['date'], proj['active-'], proj['active+'], alpha=0.2) 
+    pproj.plots[-1].fill_between(proj['date'], proj['new-'], proj['new+'], alpha=0.2) 
+    

@@ -162,7 +162,12 @@ def proj_prog(trend, region, dist=14, fit_start=None, fit_end=None):
     if fit_end:
         plots.plot([fit_end, fit_end], [0, trend.get(fit_end, region)], ':')
     plots.text(end, trend.last(region), "{:,}".format(trend.last(region)))
-    plots.text(pproj.last('date'), pproj.last(region), "{:,}".format(int(pproj.last(region))))
+    plots.text(pproj.last('date'), pproj.last(region), 
+               "{:,}".format(int(pproj.last(region))))
+    plots.text(pproj.last('date'), pproj.last('active'), 
+               "{:,}".format(int(pproj.last('active'))))
+    plots.text(pproj.last('date'), pproj.last('new'), 
+               "{:,}".format(int(pproj.last('new'))))
     pproj.plots[-1].fill_between(proj['date'], proj[region+'-'], proj[region+'+'], alpha=0.2)
     pproj.plots[-1].fill_between(proj['date'], proj['active-'], proj['active+'], alpha=0.2) 
     pproj.plots[-1].fill_between(proj['date'], proj['new-'], proj['new+'], alpha=0.2) 
